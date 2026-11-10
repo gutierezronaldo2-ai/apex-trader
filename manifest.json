@@ -1,12 +1,24 @@
 {
-  "background_color": "#0f172a",
-  "dir": "ltr",
-  "display": "standalone",
-  "name": "Apex Trader",
-  "orientation": "any",
-  "scope": "/",
+  "name": "Apex Trader | Suite Profesional de Estrategias & Backtesting",
   "short_name": "ApexTrader",
-  "start_url": "/",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f172a",
   "theme_color": "#0f172a",
-  "description": "Suite Profesional de Estrategias &amp; Backtesting"
+  "orientation": "portrait",
+  "id": "apex.trader.app",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1055/1055666.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
 }
