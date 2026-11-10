@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apex Trader | Suite Profesional de Estrategias & Backtesting</title>
+    
+    <!-- PWA Manifest & Theme Integration -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Chart.js -->
@@ -27,7 +34,6 @@
         .table-stripe tr:nth-child(even) {
             background-color: #182234;
         }
-        /* Custom scrollbars */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -90,10 +96,10 @@
     <!-- Main Content Body -->
     <main class="flex-1 p-4 lg:p-6 space-y-6 max-w-[1800px] w-full mx-auto">
 
-        <!-- SECTION 1: DASHBOARD & ANALYTICS (BETPRACTICE LAYOUT) -->
+        <!-- SECTION 1: DASHBOARD & ANALYTICS -->
         <div id="tab-dashboard" class="space-y-6">
 
-            <!-- SYSTEM REPORT BANNER (Auditoría Últimos 50 Eventos) -->
+            <!-- SYSTEM REPORT BANNER -->
             <div class="bet-card p-5 accent-glow border-teal-500/30">
                 <div class="flex justify-between items-center mb-4">
                     <div class="flex items-center space-x-3">
@@ -106,38 +112,32 @@
                         <button class="px-3 py-1 bg-teal-500 text-slate-950 font-bold rounded">All Time</button>
                         <button class="px-3 py-1 bg-slate-800 text-slate-400 rounded hover:text-white">Last 7 Days</button>
                         <button class="px-3 py-1 bg-slate-800 text-slate-400 rounded hover:text-white">Last 30 Days</button>
-                        <button class="px-3 py-1 bg-slate-800 text-slate-400 rounded hover:text-white">Last Season</button>
                     </div>
                 </div>
 
-                <!-- Metrics Grid -->
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
                     <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 text-center">
                         <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">YIELD</div>
                         <div class="text-2xl font-black text-emerald-400" id="sys-yield">16.25%</div>
                         <div class="text-[10px] text-slate-500 mt-1">Retorno sobre Stake</div>
                     </div>
-
                     <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 text-center">
-                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">UNIDADES (UNITS)</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">UNIDADES</div>
                         <div class="text-2xl font-black text-teal-300" id="sys-units">+142.20 U</div>
                         <div class="text-[10px] text-slate-500 mt-1">(1017.20 - 875.00)</div>
                     </div>
-
                     <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 text-center">
-                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">PORCENTAJE DE ACIERTO</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">ACIERTOS</div>
                         <div class="text-2xl font-black text-white" id="sys-success-rate">66%</div>
                         <div class="text-[10px] text-emerald-400 mt-1" id="sys-success-detail">(33/50 acertados)</div>
                     </div>
-
                     <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 text-center">
-                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">MUESTRA (SAMPLE)</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">MUESTRA</div>
                         <div class="text-2xl font-black text-slate-200" id="sys-sample">50</div>
                         <div class="text-[10px] text-slate-500 mt-1">Partidos auditados</div>
                     </div>
-
                     <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 text-center">
-                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">CUOTA PROMEDIO</div>
+                        <div class="text-xs text-slate-400 uppercase tracking-wider mb-1">CUOTA MEDIA</div>
                         <div class="text-2xl font-black text-amber-400" id="sys-avg-odds">1.82</div>
                         <div class="text-[10px] text-slate-500 mt-1">Valor medio entrada</div>
                     </div>
@@ -146,40 +146,29 @@
                 <div class="mt-4 pt-3 border-t border-slate-800/60 flex justify-between items-center text-xs">
                     <span class="text-slate-400">
                         <i class="fa-solid fa-triangle-exclamation text-rose-400 me-1"></i>
-                        Maximum Drawdown of the system (Units): 
-                        <strong class="text-rose-400 font-mono ms-1" id="sys-drawdown">-10.02€ / -3.2 U</strong>
+                        Max Drawdown: <strong class="text-rose-400 font-mono ms-1" id="sys-drawdown">-10.02€ / -3.2 U</strong>
                     </span>
                     <button onclick="exportBacktestCSV()" class="text-teal-400 hover:text-teal-300 font-semibold flex items-center">
-                        <i class="fa-solid fa-file-csv me-1.5"></i> Exportar Muestra a CSV
+                        <i class="fa-solid fa-file-csv me-1.5"></i> Exportar CSV
                     </button>
                 </div>
             </div>
 
-            <!-- MAIN DUAL-PANEL GRID (Betpractice Layout) -->
+            <!-- DUAL PANEL GRID -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-
-                <!-- LEFT SIDE (8 COLS): BACKTESTING RESULTS & LEAGUE AUDIT -->
                 <div class="lg:col-span-7 space-y-6">
-
                     <div class="bet-card p-5">
                         <div class="flex justify-between items-center mb-4">
                             <div>
                                 <h3 class="text-base font-bold text-white">Backtesting Results</h3>
-                                <p class="text-xs text-slate-400">Auditoría detallada de las 7 ligas aprobadas y últimos 50 partidos</p>
+                                <p class="text-xs text-slate-400">Auditoría detallada de las 7 ligas aprobadas</p>
                             </div>
-
-                            <!-- Toggle between Detailed Events and League Summary -->
                             <div class="flex bg-slate-950 p-1 rounded border border-slate-800 text-xs">
-                                <button onclick="toggleBacktestView('detailed')" id="btn-view-detailed" class="px-3 py-1 rounded bg-teal-500 text-slate-950 font-bold">
-                                    50 Eventos
-                                </button>
-                                <button onclick="toggleBacktestView('leagues')" id="btn-view-leagues" class="px-3 py-1 rounded text-slate-400 hover:text-white">
-                                    Por Ligas
-                                </button>
+                                <button onclick="toggleBacktestView('detailed')" id="btn-view-detailed" class="px-3 py-1 rounded bg-teal-500 text-slate-950 font-bold">50 Eventos</button>
+                                <button onclick="toggleBacktestView('leagues')" id="btn-view-leagues" class="px-3 py-1 rounded text-slate-400 hover:text-white">Por Ligas</button>
                             </div>
                         </div>
 
-                        <!-- VIEW 1: DETAILED 50 EVENTS TABLE -->
                         <div id="view-backtest-detailed" class="overflow-x-auto">
                             <table class="w-full text-left text-xs table-stripe border-collapse">
                                 <thead class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px]">
@@ -194,119 +183,82 @@
                                         <th class="p-2.5 text-right">Yield</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-backtest-events" class="divide-y divide-slate-800/50">
-                                    <!-- Dynamic Rows Generated by JS -->
-                                </tbody>
+                                <tbody id="table-backtest-events" class="divide-y divide-slate-800/50"></tbody>
                             </table>
                         </div>
 
-                        <!-- VIEW 2: LEAGUE BREAKDOWN TABLE -->
                         <div id="view-backtest-leagues" class="hidden overflow-x-auto">
                             <table class="w-full text-left text-xs table-stripe border-collapse">
                                 <thead class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px]">
                                     <tr>
                                         <th class="p-2.5">Liga</th>
-                                        <th class="p-2.5 text-center">Muestra (Sample)</th>
+                                        <th class="p-2.5 text-center">Muestra</th>
                                         <th class="p-2.5 text-center">% Acierto</th>
-                                        <th class="p-2.5 text-center">Stake Total</th>
-                                        <th class="p-2.5 text-right">Ganancia (Winnings)</th>
+                                        <th class="p-2.5 text-center">Stake</th>
+                                        <th class="p-2.5 text-right">Ganancia</th>
                                         <th class="p-2.5 text-right">Yield</th>
                                         <th class="p-2.5 text-center">Avg Odds</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-backtest-leagues" class="divide-y divide-slate-800/50">
-                                    <!-- Dynamic League Rows -->
-                                </tbody>
+                                <tbody id="table-backtest-leagues" class="divide-y divide-slate-800/50"></tbody>
                             </table>
                         </div>
-
                     </div>
 
-                    <!-- PnL Chart Card -->
                     <div class="bet-card p-5">
                         <h3 class="text-sm font-bold text-white mb-3">Curva de Crecimiento de Capital (PnL Chart)</h3>
-                        <div class="h-64">
-                            <canvas id="pnlChart"></canvas>
-                        </div>
+                        <div class="h-64"><canvas id="pnlChart"></canvas></div>
                     </div>
-
                 </div>
 
-                <!-- RIGHT SIDE (5 COLS): SYSTEM PICKS & SYSTEM DESCRIPTION -->
                 <div class="lg:col-span-5 space-y-6">
-
-                    <!-- SYSTEM PICKS PANEL -->
                     <div class="bet-card p-5">
                         <div class="flex justify-between items-center mb-3">
                             <h3 class="text-base font-bold text-white flex items-center">
-                                <span class="w-2 h-2 bg-emerald-400 rounded-full me-2 animate-pulse"></span>
-                                System Picks
+                                <span class="w-2 h-2 bg-emerald-400 rounded-full me-2 animate-pulse"></span> System Picks
                             </h3>
                             <span class="text-[11px] text-slate-400 font-mono">Market: <strong class="text-teal-400">Over 1.5 FT</strong></span>
                         </div>
-                        <p class="text-xs text-slate-400 mb-3">Partidos filtrados activos cumpliendo el protocolo</p>
-
                         <div class="overflow-x-auto">
                             <table class="w-full text-left text-xs table-stripe border-collapse">
                                 <thead class="bg-slate-950 text-slate-400 font-mono uppercase text-[10px]">
                                     <tr>
-                                        <th class="p-2">Fecha/Hora</th>
+                                        <th class="p-2">Hora</th>
                                         <th class="p-2">Liga</th>
                                         <th class="p-2">Partido</th>
                                         <th class="p-2 text-center">Cuota</th>
                                         <th class="p-2 text-center">Valor %</th>
                                     </tr>
                                 </thead>
-                                <tbody id="table-system-picks" class="divide-y divide-slate-800/50">
-                                    <!-- Dynamic Picks Rows -->
-                                </tbody>
+                                <tbody id="table-system-picks" class="divide-y divide-slate-800/50"></tbody>
                             </table>
                         </div>
                     </div>
 
-                    <!-- SYSTEM DESCRIPTION PANEL -->
                     <div class="bet-card p-5">
                         <div class="flex justify-between items-center mb-3">
                             <h3 class="text-base font-bold text-white">System Description</h3>
                             <span class="text-xs bg-slate-800 text-slate-300 px-2 py-0.5 rounded">Ficha Técnica</span>
                         </div>
-
                         <div class="space-y-3 text-xs">
                             <div class="p-3 bg-slate-950/80 rounded border border-slate-800">
-                                <div class="text-slate-400 text-[11px] mb-1">Nombre del Sistema:</div>
+                                <div class="text-slate-400 text-[11px] mb-1">Nombre:</div>
                                 <div class="font-bold text-teal-300 text-sm" id="sys-desc-name">SNIPER GOLES OVER 1.5 FT</div>
                             </div>
-
-                            <div class="p-3 bg-slate-950/80 rounded border border-slate-800 space-y-2">
-                                <div class="text-slate-400 text-[11px]">Filtros Básicos Aprobados:</div>
-                                <div class="flex flex-wrap gap-1.5" id="sys-desc-leagues">
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">Eredivisie</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">Besta deild karla</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">Bundesliga</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">Austrian Bundesliga</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">Swiss Super League</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">A-League</span>
-                                    <span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">2. Bundesliga</span>
-                                </div>
-                            </div>
-
                             <div class="p-3 bg-slate-950/80 rounded border border-slate-800">
                                 <div class="text-slate-400 text-[11px] mb-1">Reglas del Protocolo (8 Pasos):</div>
                                 <ul class="list-disc list-inside space-y-1 text-slate-300 text-[11px]">
                                     <li>Mínimo 3/5 partidos recientes con +2.5 goles.</li>
-                                    <li>H2H: 3/5 duelos directos con +2.5 goles (vetados 0-0, 1-0, 1-1).</li>
-                                    <li>Live Min 25-30: 1-2 tiros a puerta reales mínimo.</li>
+                                    <li>H2H: 3/5 duelos directos con +2.5 goles.</li>
+                                    <li>Live Min 25-30: 1-2 tiros a puerta mínimos.</li>
                                     <li>Ventana de entrada: Min 30-40 con 0-0 a cuota ≥ 1.50.</li>
-                                    <li>Gestión de Stake: Criterio de Kelly Fraccionado (25%-50%).</li>
+                                    <li>Gestión de Stake: Criterio de Kelly Fraccionado.</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <!-- SECTION 2: RADAR LIVE -->
@@ -314,12 +266,9 @@
             <div class="bet-card p-5">
                 <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-white flex items-center">
-                        <i class="fa-solid fa-radar text-teal-400 me-2 animate-pulse"></i>
-                        Radar Live Scanner (Tiempo Real)
+                        <i class="fa-solid fa-radar text-teal-400 me-2 animate-pulse"></i> Radar Live Scanner
                     </h2>
-                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full">
-                        Escaneo activo en 7 ligas
-                    </span>
+                    <span class="text-xs bg-emerald-950 text-emerald-400 border border-emerald-500/40 px-3 py-1 rounded-full">Escaneo activo</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-xs table-stripe border-collapse">
@@ -329,14 +278,12 @@
                                 <th class="p-3">Liga</th>
                                 <th class="p-3">Partido</th>
                                 <th class="p-3 text-center">Marcador</th>
-                                <th class="p-3 text-center">Tiros a Puerta</th>
+                                <th class="p-3 text-center">Tiros Puerta</th>
                                 <th class="p-3 text-center">Cuota Live</th>
-                                <th class="p-3 text-center">Estado Protocolo</th>
+                                <th class="p-3 text-center">Estado</th>
                             </tr>
                         </thead>
-                        <tbody id="table-radar-live" class="divide-y divide-slate-800">
-                            <!-- Dynamic Live Radar Rows -->
-                        </tbody>
+                        <tbody id="table-radar-live" class="divide-y divide-slate-800"></tbody>
                     </table>
                 </div>
             </div>
@@ -346,9 +293,7 @@
         <div id="tab-hub" class="hidden space-y-4">
             <div class="bet-card p-5">
                 <h2 class="text-lg font-bold text-white mb-4">Hub de Estrategias Registradas</h2>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="strategies-hub-grid">
-                    <!-- Dynamic Strategy Cards -->
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="strategies-hub-grid"></div>
             </div>
         </div>
 
@@ -356,43 +301,37 @@
         <div id="tab-kelly" class="hidden space-y-4 max-w-2xl mx-auto">
             <div class="bet-card p-6 accent-glow border-teal-500/40">
                 <h2 class="text-lg font-bold text-white mb-1 flex items-center">
-                    <i class="fa-solid fa-calculator text-teal-400 me-2"></i>
-                    Calculadora Kelly Fraccionado (Paso 8)
+                    <i class="fa-solid fa-calculator text-teal-400 me-2"></i> Calculadora Kelly Fraccionado
                 </h2>
-                <p class="text-xs text-slate-400 mb-6">Gestión financiera matemática para evitar la ruina y maximizar crecimiento</p>
-
+                <p class="text-xs text-slate-400 mb-6">Gestión financiera matemática para maximizar crecimiento</p>
                 <div class="space-y-4 text-xs">
                     <div>
-                        <label class="block text-slate-300 font-medium mb-1">Bankroll Total (€ / $):</label>
-                        <input type="number" id="kelly-bankroll" value="1000" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-teal-300 text-sm font-bold focus:border-teal-500 focus:outline-none">
+                        <label class="block text-slate-300 font-medium mb-1">Bankroll Total (€):</label>
+                        <input type="number" id="kelly-bankroll" value="1000" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-teal-300 text-sm font-bold focus:outline-none">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-slate-300 font-medium mb-1">Cuota de Entrada (Odds):</label>
-                            <input type="number" id="kelly-odds" value="1.55" step="0.01" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-bold focus:border-teal-500 focus:outline-none">
+                            <label class="block text-slate-300 font-medium mb-1">Cuota de Entrada:</label>
+                            <input type="number" id="kelly-odds" value="1.55" step="0.01" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-bold focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-slate-300 font-medium mb-1">Probabilidad Estimada (%):</label>
-                            <input type="number" id="kelly-prob" value="70" step="1" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-bold focus:border-teal-500 focus:outline-none">
+                            <label class="block text-slate-300 font-medium mb-1">Probabilidad (%):</label>
+                            <input type="number" id="kelly-prob" value="70" step="1" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-bold focus:outline-none">
                         </div>
                     </div>
                     <div>
                         <label class="block text-slate-300 font-medium mb-1">Fracción de Kelly:</label>
-                        <select id="kelly-fraction" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-medium focus:border-teal-500 focus:outline-none">
-                            <option value="0.25" selected>25% de Kelly (Conservador / Recomendado)</option>
+                        <select id="kelly-fraction" class="w-full bg-slate-950 border border-slate-800 rounded p-2.5 text-white font-medium focus:outline-none">
+                            <option value="0.25" selected>25% de Kelly (Recomendado)</option>
                             <option value="0.50">50% de Kelly (Moderado)</option>
-                            <option value="1.00">100% Kelly Puro (Agresivo)</option>
+                            <option value="1.00">100% Kelly Puro</option>
                         </select>
                     </div>
-
-                    <button onclick="calculateKelly()" class="w-full py-3 bg-teal-500 text-slate-950 font-black rounded-lg text-sm hover:bg-teal-400 transition">
-                        CALCULAR STAKE EXACTO
-                    </button>
-
+                    <button onclick="calculateKelly()" class="w-full py-3 bg-teal-500 text-slate-950 font-black rounded-lg text-sm hover:bg-teal-400 transition">CALCULAR STAKE</button>
                     <div class="mt-6 p-4 bg-slate-950 rounded-lg border border-slate-800 text-center space-y-2">
-                        <div class="text-xs text-slate-400">Stake Sugerido a Apostar:</div>
+                        <div class="text-xs text-slate-400">Stake Sugerido:</div>
                         <div class="text-3xl font-black text-emerald-400" id="kelly-result-amount">18.18 €</div>
-                        <div class="text-xs text-slate-300 font-mono" id="kelly-result-percent">(1.82% de tu Bankroll)</div>
+                        <div class="text-xs text-slate-300 font-mono" id="kelly-result-percent">(1.82% del Bankroll)</div>
                     </div>
                 </div>
             </div>
@@ -402,70 +341,34 @@
 
     <!-- JavaScript Data & Logic -->
     <script>
-        // DATA STRUCTURE: Strategies database
         const strategies = {
             'sniper-15': {
-                id: 'sniper-15',
-                name: 'Sniper Goles Over 1.5 FT',
-                market: 'Over 1.5 FT',
-                yield: '16.25%',
-                units: '+142.20 U',
-                successRate: '66%',
-                successDetail: '(33/50 acertados)',
-                sample: 50,
-                avgOdds: '1.82',
-                drawdown: '-10.02€ / -3.2 U',
-                leagues: ['Eredivisie', 'Besta deild karla', 'Bundesliga', 'Austrian Bundesliga', 'Swiss Super League', 'A-League', '2. Bundesliga'],
+                id: 'sniper-15', name: 'Sniper Goles Over 1.5 FT', market: 'Over 1.5 FT',
+                yield: '16.25%', units: '+142.20 U', successRate: '66%', successDetail: '(33/50)', sample: 50, avgOdds: '1.82', drawdown: '-10.02€ / -3.2 U',
+                leagues: ['Eredivisie', 'Besta deild', 'Bundesliga', 'Austrian Bundesliga', 'Swiss Super League', 'A-League', '2. Bundesliga'],
                 picks: [
                     { date: '22/11 18:30', league: 'NED-Ere', teams: 'AZ Alkmaar vs Ajax', odds: '1.55', val: '+14.2%' },
-                    { date: '22/11 20:00', league: 'GER-BUN', teams: 'Eintracht vs Dortmund', odds: '1.60', val: '+18.5%' },
-                    { date: '23/11 14:30', league: 'AUT-BUN', teams: 'Salzburg vs LASK', odds: '1.52', val: '+10.1%' }
+                    { date: '22/11 20:00', league: 'GER-BUN', teams: 'Eintracht vs Dortmund', odds: '1.60', val: '+18.5%' }
                 ]
             },
             'corner-95': {
-                id: 'corner-95',
-                name: 'Corner Sniper Over 9.5',
-                market: 'Over 9.5 Córners',
-                yield: '12.40%',
-                units: '+88.50 U',
-                successRate: '62%',
-                successDetail: '(31/50 acertados)',
-                sample: 50,
-                avgOdds: '1.91',
-                drawdown: '-14.00€ / -4.5 U',
+                id: 'corner-95', name: 'Corner Sniper Over 9.5', market: 'Over 9.5 Córners',
+                yield: '12.40%', units: '+88.50 U', successRate: '62%', successDetail: '(31/50)', sample: 50, avgOdds: '1.91', drawdown: '-14.00€ / -4.5 U',
                 leagues: ['Premier League', 'Bundesliga', 'La Liga'],
-                picks: [
-                    { date: '22/11 16:00', league: 'ENG-Prem', teams: 'Liverpool vs Everton', odds: '1.85', val: '+12.0%' }
-                ]
+                picks: [{ date: '22/11 16:00', league: 'ENG-Prem', teams: 'Liverpool vs Everton', odds: '1.85', val: '+12.0%' }]
             },
             'btts-yes': {
-                id: 'btts-yes',
-                name: 'Ambos Anotan (BTTS Yes)',
-                market: 'Ambos Equipos Marcan',
-                yield: '9.80%',
-                units: '+54.10 U',
-                successRate: '58%',
-                successDetail: '(29/50 acertados)',
-                sample: 50,
-                avgOdds: '1.88',
-                drawdown: '-18.20€ / -5.8 U',
+                id: 'btts-yes', name: 'Ambos Anotan (BTTS Yes)', market: 'Ambos Equipos Marcan',
+                yield: '9.80%', units: '+54.10 U', successRate: '58%', successDetail: '(29/50)', sample: 50, avgOdds: '1.88', drawdown: '-18.20€ / -5.8 U',
                 leagues: ['Bundesliga', 'Serie A', 'Eredivisie'],
-                picks: [
-                    { date: '23/11 17:30', league: 'GER-BUN', teams: 'Leverkusen vs Bayern', odds: '1.75', val: '+8.4%' }
-                ]
+                picks: [{ date: '23/11 17:30', league: 'GER-BUN', teams: 'Leverkusen vs Bayern', odds: '1.75', val: '+8.4%' }]
             }
         };
 
-        // Simulated 50 events historical dataset for Backtesting table
         const generate50Events = () => {
             const list = [];
             const leaguesList = ['NED-Ere', 'ISL-Bes', 'GER-BUN', 'AUT-BUN', 'SUI-Sup', 'AUS-ALE', 'GER-BU2'];
-            const teamsList = [
-                ['PSV', 'Feyenoord'], ['Vikingur', 'Valur'], ['Bayern', 'Leipzig'],
-                ['Rapid Wien', 'Sturm Graz'], ['Young Boys', 'Basel'], ['Sydney FC', 'Melbourne Victory'],
-                ['Hamburg', 'St. Pauli']
-            ];
-
+            const teamsList = [['PSV', 'Feyenoord'], ['Vikingur', 'Valur'], ['Bayern', 'Leipzig'], ['Rapid', 'Sturm'], ['Young Boys', 'Basel'], ['Sydney', 'Melbourne'], ['Hamburg', 'St. Pauli']];
             for (let i = 50; i >= 1; i--) {
                 const isWin = Math.random() < 0.66;
                 const odds = (1.50 + Math.random() * 0.45).toFixed(2);
@@ -473,30 +376,18 @@
                 const score = isWin ? `${Math.floor(Math.random()*2+1)}-${Math.floor(Math.random()*2+1)}` : '0-0';
                 const stake = 20;
                 const profit = isWin ? (stake * (parseFloat(odds) - 1)).toFixed(2) : (-stake).toFixed(2);
-                const yieldInd = isWin ? `${((parseFloat(odds)-1)*100).toFixed(1)}%` : '-100%';
-
                 list.push({
-                    id: i,
-                    date: `Event #${i}`,
-                    league: leaguesList[lIndex],
-                    match: `${teamsList[lIndex][0]} vs ${teamsList[lIndex][1]}`,
-                    score: score,
-                    odds: odds,
-                    stake: `${stake}€`,
-                    profit: profit > 0 ? `+${profit}€` : `${profit}€`,
-                    isWin: isWin,
-                    yield: yieldInd
+                    id: i, date: `Ev #${i}`, league: leaguesList[lIndex], match: `${teamsList[lIndex][0]} vs ${teamsList[lIndex][1]}`,
+                    score: score, odds: odds, stake: `${stake}€`, profit: profit > 0 ? `+${profit}€` : `${profit}€`, isWin: isWin, yield: isWin ? `${((parseFloat(odds)-1)*100).toFixed(1)}%` : '-100%'
                 });
             }
             return list;
         };
 
         const backtestEvents = generate50Events();
-
         let activeStrategy = 'sniper-15';
         let chartInstance = null;
 
-        // INITIALIZATION
         document.addEventListener('DOMContentLoaded', () => {
             renderDashboard();
             renderRadarLive();
@@ -504,7 +395,6 @@
             initChart();
         });
 
-        // SWITCH TAB
         function switchTab(tabId) {
             ['dashboard', 'radar', 'hub', 'kelly'].forEach(t => {
                 document.getElementById(`tab-${t}`).classList.add('hidden');
@@ -514,18 +404,14 @@
             document.getElementById(`btn-tab-${tabId}`).className = "px-4 py-1.5 rounded font-medium text-xs bg-teal-500 text-slate-950 font-bold";
         }
 
-        // CHANGE ACTIVE STRATEGY
         function changeActiveStrategy(stratId) {
             activeStrategy = stratId;
             document.getElementById('headerStrategySelect').value = stratId;
             renderDashboard();
         }
 
-        // RENDER DASHBOARD PANELS
         function renderDashboard() {
             const st = strategies[activeStrategy];
-
-            // System report metrics
             document.getElementById('sys-yield').innerText = st.yield;
             document.getElementById('sys-units').innerText = st.units;
             document.getElementById('sys-success-rate').innerText = st.successRate;
@@ -533,16 +419,9 @@
             document.getElementById('sys-sample').innerText = st.sample;
             document.getElementById('sys-avg-odds').innerText = st.avgOdds;
             document.getElementById('sys-drawdown').innerText = st.drawdown;
-
-            // System description
             document.getElementById('sys-desc-name').innerText = st.name.toUpperCase();
-            document.getElementById('sys-desc-leagues').innerHTML = st.leagues
-                .map(l => `<span class="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[10px]">${l}</span>`)
-                .join('');
 
-            // Detailed 50 events table
-            const tbodyEvents = document.getElementById('table-backtest-events');
-            tbodyEvents.innerHTML = backtestEvents.map(e => `
+            document.getElementById('table-backtest-events').innerHTML = backtestEvents.map(e => `
                 <tr class="hover:bg-slate-800/40">
                     <td class="p-2.5 text-slate-400 font-mono">${e.date}</td>
                     <td class="p-2.5 font-semibold text-slate-300">${e.league}</td>
@@ -555,9 +434,7 @@
                 </tr>
             `).join('');
 
-            // League breakdown table
-            const tbodyLeagues = document.getElementById('table-backtest-leagues');
-            tbodyLeagues.innerHTML = st.leagues.map(l => `
+            document.getElementById('table-backtest-leagues').innerHTML = st.leagues.map(l => `
                 <tr class="hover:bg-slate-800/40">
                     <td class="p-2.5 font-bold text-slate-200">${l}</td>
                     <td class="p-2.5 text-center font-mono">7</td>
@@ -569,9 +446,7 @@
                 </tr>
             `).join('');
 
-            // System picks table
-            const tbodyPicks = document.getElementById('table-system-picks');
-            tbodyPicks.innerHTML = st.picks.map(p => `
+            document.getElementById('table-system-picks').innerHTML = st.picks.map(p => `
                 <tr class="hover:bg-slate-800/40">
                     <td class="p-2 text-slate-400 font-mono">${p.date}</td>
                     <td class="p-2 font-semibold text-slate-300">${p.league}</td>
@@ -582,7 +457,6 @@
             `).join('');
         }
 
-        // TOGGLE BACKTEST VIEWS
         function toggleBacktestView(view) {
             if(view === 'detailed') {
                 document.getElementById('view-backtest-detailed').classList.remove('hidden');
@@ -597,16 +471,12 @@
             }
         }
 
-        // RENDER RADAR LIVE
         function renderRadarLive() {
             const radarData = [
                 { min: "34'", league: "NED-Ere", match: "AZ Alkmaar vs Ajax", score: "0 - 0", shots: "2 (1)", odds: "1.57", status: "ALERTA FRANCOTIRADOR", alert: true },
-                { min: "28'", league: "GER-BUN", match: "Eintracht vs Dortmund", score: "0 - 0", shots: "1 (0)", odds: "1.48", status: "Evaluando min 30", alert: false },
-                { min: "62'", league: "AUT-BUN", match: "Salzburg vs LASK", score: "1 - 1", shots: "7 (4)", odds: "---", status: "Objetivo Cumplido (+1.5)", alert: false }
+                { min: "28'", league: "GER-BUN", match: "Eintracht vs Dortmund", score: "0 - 0", shots: "1 (0)", odds: "1.48", status: "Evaluando min 30", alert: false }
             ];
-
-            const tbody = document.getElementById('table-radar-live');
-            tbody.innerHTML = radarData.map(r => `
+            document.getElementById('table-radar-live').innerHTML = radarData.map(r => `
                 <tr class="${r.alert ? 'bg-emerald-950/30' : ''} hover:bg-slate-800/40">
                     <td class="p-3 font-mono font-bold ${r.alert ? 'text-emerald-400 animate-pulse' : 'text-slate-400'}">${r.min}</td>
                     <td class="p-3 font-semibold text-slate-300">${r.league}</td>
@@ -614,66 +484,42 @@
                     <td class="p-3 text-center font-bold text-amber-400">${r.score}</td>
                     <td class="p-3 text-center font-mono text-slate-300">${r.shots}</td>
                     <td class="p-3 text-center font-bold text-teal-400">${r.odds}</td>
-                    <td class="p-3 text-center">
-                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${r.alert ? 'bg-emerald-500 text-slate-950 animate-bounce' : 'bg-slate-800 text-slate-400'}">
-                            ${r.status}
-                        </span>
-                    </td>
+                    <td class="p-3 text-center"><span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${r.alert ? 'bg-emerald-500 text-slate-950 animate-bounce' : 'bg-slate-800 text-slate-400'}">${r.status}</span></td>
                 </tr>
             `).join('');
         }
 
-        // RENDER STRATEGIES HUB
         function renderHub() {
-            const grid = document.getElementById('strategies-hub-grid');
-            grid.innerHTML = Object.values(strategies).map(s => `
+            document.getElementById('strategies-hub-grid').innerHTML = Object.values(strategies).map(s => `
                 <div class="bet-card p-5 space-y-3 relative overflow-hidden">
                     <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="font-bold text-white text-base">${s.name}</h3>
-                            <span class="text-xs text-teal-400 font-mono">${s.market}</span>
-                        </div>
-                        <button onclick="changeActiveStrategy('${s.id}'); switchTab('dashboard');" class="px-3 py-1 bg-teal-500 text-slate-950 font-bold rounded text-xs hover:bg-teal-400">
-                            Activar
-                        </button>
+                        <div><h3 class="font-bold text-white text-base">${s.name}</h3><span class="text-xs text-teal-400 font-mono">${s.market}</span></div>
+                        <button onclick="changeActiveStrategy('${s.id}'); switchTab('dashboard');" class="px-3 py-1 bg-teal-500 text-slate-950 font-bold rounded text-xs hover:bg-teal-400">Activar</button>
                     </div>
-
                     <div class="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-slate-800">
                         <div><span class="text-slate-400">Yield:</span> <strong class="text-emerald-400">${s.yield}</strong></div>
                         <div><span class="text-slate-400">Unidades:</span> <strong class="text-teal-300">${s.units}</strong></div>
-                        <div><span class="text-slate-400">% Acierto:</span> <strong class="text-white">${s.successRate}</strong></div>
-                        <div><span class="text-slate-400">Cuota Prom:</span> <strong class="text-amber-400">${s.avgOdds}</strong></div>
                     </div>
                 </div>
             `).join('');
         }
 
-        // CALCULATE KELLY
         function calculateKelly() {
             const b = parseFloat(document.getElementById('kelly-bankroll').value);
             const odds = parseFloat(document.getElementById('kelly-odds').value);
             const p = parseFloat(document.getElementById('kelly-prob').value) / 100;
             const frac = parseFloat(document.getElementById('kelly-fraction').value);
-
             const q = 1 - p;
             const bOdds = odds - 1;
             const kellyFull = (bOdds * p - q) / bOdds;
-
             if (kellyFull <= 0) {
-                document.getElementById('kelly-result-amount').innerText = "0.00 € (Sin Valor)";
-                document.getElementById('kelly-result-percent').innerText = "(No apostar según Kelly)";
-                return;
+                document.getElementById('kelly-result-amount').innerText = "0.00 €"; return;
             }
-
-            const kellyFractional = kellyFull * frac;
-            const stake = b * kellyFractional;
-            const stakePercent = kellyFractional * 100;
-
+            const stake = b * (kellyFull * frac);
             document.getElementById('kelly-result-amount').innerText = `${stake.toFixed(2)} €`;
-            document.getElementById('kelly-result-percent').innerText = `(${stakePercent.toFixed(2)}% de tu Bankroll)`;
+            document.getElementById('kelly-result-percent`).innerText = `(${(kellyFull * frac * 100).toFixed(2)}% del Bankroll)`;
         }
 
-        // INIT PNL CHART
         function initChart() {
             const ctx = document.getElementById('pnlChart').getContext('2d');
             chartInstance = new Chart(ctx, {
@@ -681,38 +527,21 @@
                 data: {
                     labels: Array.from({length: 20}, (_, i) => `E${i+1}`),
                     datasets: [{
-                        label: 'Acumulado Unidades (+U)',
+                        label: 'Acumulado Unidades',
                         data: [0, 1.1, 2.3, 1.3, 2.8, 4.2, 5.5, 4.5, 6.2, 8.0, 9.5, 8.8, 10.4, 12.1, 13.5, 12.8, 14.2, 15.6, 17.0, 18.5],
-                        borderColor: '#14b8a6',
-                        backgroundColor: 'rgba(20, 184, 166, 0.1)',
-                        fill: true,
-                        tension: 0.3
+                        borderColor: '#14b8a6', backgroundColor: 'rgba(20, 184, 166, 0.1)', fill: true, tension: 0.3
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } },
-                        y: { grid: { color: '#1e293b' }, ticks: { color: '#64748b' } }
-                    }
-                }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
         }
 
-        // EXPORT TO CSV
         function exportBacktestCSV() {
             let csv = "Fecha,Liga,Partido,Marcador,Cuota,Stake,Profit,Yield\n";
-            backtestEvents.forEach(e => {
-                csv += `"${e.date}","${e.league}","${e.match}","${e.score}","${e.odds}","${e.stake}","${e.profit}","${e.yield}"\n`;
-            });
+            backtestEvents.forEach(e => { csv += `"${e.date}","${e.league}","${e.match}","${e.score}","${e.odds}","${e.stake}","${e.profit}","${e.yield}"\n`; });
             const blob = new Blob([csv], { type: 'text/csv' });
             const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.setAttribute('href', url);
-            a.setAttribute('download', 'ApexTrader_Backtesting_50Eventos.csv');
-            a.click();
+            const a = document.createElement('a'); a.href = url; a.download = 'ApexTrader_Backtesting.csv'; a.click();
         }
     </script>
 </body>
