@@ -1,6 +1,7 @@
 {
   "name": "Apex Trader | Suite Profesional de Estrategias & Backtesting",
   "short_name": "ApexTrader",
+  "description": "Suite profesional de trading deportivo y backtesting con estrategias de goles.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0f172a",
@@ -8,7 +9,13 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "Gemini_Generated_Image_dz079pdz079pdz07.jpg",
+      "src": "./Gemini_Generated_Image_dz079pdz079pdz07.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./Gemini_Generated_Image_dz079pdz079pdz07.jpg",
       "sizes": "512x512",
       "type": "image/jpeg",
       "purpose": "any maskable"
