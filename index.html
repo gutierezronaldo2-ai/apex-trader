@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Trader | Protocolo Exclusivo Over 1.5 FT & Histórico</title>
+    <title>Apex Trader | Suite Profesional Multi-Tab</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
@@ -33,232 +33,343 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-black tracking-wider text-white">APEX <span class="text-accentGreen">TRADER</span></h1>
-                    <p class="text-xs text-slate-400">Estrategia Exclusiva Over 1.5 FT | Suite Profesional & Auditoría</p>
+                    <p class="text-xs text-slate-400">Protocolo Exclusivo Over 1.5 FT | Suite Profesional</p>
                 </div>
             </div>
-            <div class="flex items-center gap-3">
-                <span class="px-3 py-1 bg-accentGreen/10 text-accentGreen text-xs font-semibold rounded-full border border-accentGreen/20">
-                    <i class="fa-solid fa-shield-halved text-[10px] mr-1.5"></i> Protocolo de 8 Pasos Activo
-                </span>
-            </div>
+            <!-- Navegación por Pestañas -->
+            <nav class="flex bg-slate-950 p-1.5 rounded-xl border border-slate-800 gap-1">
+                <button onclick="switchTab('live')" id="tab-live" class="px-4 py-2 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-tower-broadcast mr-1"></i> En Vivo & Próximos
+                </button>
+                <button onclick="switchTab('hub')" id="tab-hub" class="px-4 py-2 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white">
+                    <i class="fa-solid fa-brain mr-1"></i> Hub de Estrategias
+                </button>
+                <button onclick="switchTab('backtest')" id="tab-backtest" class="px-4 py-2 text-xs font-bold rounded-lg transition bg-accentGreen text-slate-950 shadow-md">
+                    <i class="fa-solid fa-chart-line mr-1"></i> Backtesting
+                </button>
+            </nav>
         </div>
     </header>
 
     <!-- Contenido Principal -->
-    <main class="max-w-7xl mx-auto px-4 mt-8 space-y-8">
+    <main class="max-w-7xl mx-auto px-4 mt-8">
 
-        <!-- Panel de Control Maestro: Filtro de las 7 Ligas -->
-        <div class="bg-gradient-to-r from-cardBg to-slate-900 p-6 rounded-2xl border border-accentGreen/30 shadow-xl">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-                <div>
-                    <h2 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-filter text-accentGreen"></i> Selector de las 7 Ligas Oficiales
-                    </h2>
-                    <p class="text-xs text-slate-400 mt-0.5">Control y auditoría estricta enfocada exclusivamente en el mercado Over 1.5 FT.</p>
-                </div>
-                <button id="resetDataBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl transition border border-slate-700">
-                    <i class="fa-solid fa-rotate-right mr-1"></i> Restaurar Historial Base
-                </button>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Filtrar por Liga Oficial Aprobada</label>
-                    <select id="filterLeague" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen font-medium">
-                        <option value="ALL">🔍 Las 7 Ligas Oficiales (Global)</option>
-                        <option value="Eredivisie">🇳🇱 1. Eredivisie (Países Bajos)</option>
-                        <option value="Besta deild karla">🇮🇸 2. Besta deild karla (Islandia)</option>
-                        <option value="Bundesliga">🇩🇪 3. Bundesliga (Alemania)</option>
-                        <option value="Austrian Bundesliga">🇦🇹 4. Austrian Bundesliga (Austria)</option>
-                        <option value="Swiss Super League">🇨🇭 5. Swiss Super League (Suiza)</option>
-                        <option value="A-League">🇦🇺 6. A-League (Australia)</option>
-                        <option value="2. Bundesliga">🇩🇪 7. 2. Bundesliga (Alemania)</option>
-                    </select>
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-400 mb-1">Estado del Test</label>
-                    <select id="filterResult" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen font-medium">
-                        <option value="ALL">📊 Todos los Resultados</option>
-                        <option value="ACERTADA">✅ Solo Acertadas</option>
-                        <option value="FALLADA">❌ Solo Falladas</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- KPIs Dinámicos -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                <span class="text-xs font-medium text-slate-400 uppercase">Tests en este Filtro</span>
-                <p id="kpiTotalMatches" class="text-2xl font-black mt-2 text-white">0</p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Partidos auditados</span>
-            </div>
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                <span class="text-xs font-medium text-slate-400 uppercase">Efectividad Over 1.5</span>
-                <p id="kpiWinRate" class="text-2xl font-black mt-2 text-accentGreen">0.0%</p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Win Rate del filtro activo</span>
-            </div>
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                <span class="text-xs font-medium text-slate-400 uppercase">Beneficio Neto (Unidades)</span>
-                <p id="kpiProfit" class="text-2xl font-black mt-2 text-white">0.00 U</p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Rendimiento financiero</span>
-            </div>
-            <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                <span class="text-xs font-medium text-slate-400 uppercase">Cuota Media de Entrada</span>
-                <p id="kpiAvgOdds" class="text-2xl font-black mt-2 text-white">1.35</p>
-                <span class="text-[11px] text-slate-500 mt-1 block">Promedio de cuotas (≥ 1.50 obj)</span>
-            </div>
-        </div>
-
-        <!-- Sección de Registro y Tabla de Seguimiento Principal -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <!-- Formulario de Registro Exclusivo Over 1.5 -->
-            <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md lg:col-span-1 space-y-4">
+        <!-- ================= PESTAÑA 1: EN VIVO & PRÓXIMOS ================= -->
+        <div id="content-live" class="tab-content space-y-6 hidden">
+            <div class="bg-gradient-to-r from-cardBg to-slate-900 p-6 rounded-2xl border border-accentBlue/30 shadow-xl">
                 <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                    <i class="fa-solid fa-square-plus text-accentGreen"></i> Registrar Test Over 1.5 FT
+                    <i class="fa-solid fa-satellite-dish text-accentBlue animate-pulse"></i> Radar de Partidos en Directo (Ventana 30'-40')
                 </h2>
-                <form id="backtestForm" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Encuentro (Local vs Visitante)</label>
-                        <input type="text" id="matchName" required placeholder="Ej: PSV vs Feyenoord" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
-                    </div>
-                    <div class="grid grid-cols-2 gap-3">
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Cuota Over 1.5</label>
-                            <input type="number" step="0.01" id="matchOdds" required placeholder="1.52" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-medium text-slate-400 mb-1">Goles Totales FT</label>
-                            <input type="number" id="matchGoals" required placeholder="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
-                        </div>
+                <p class="text-xs text-slate-400 mt-1">Escaneo automático de encuentros en las 7 ligas aprobadas con marcador 0-0 buscando cuota 1.50+.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="liveMatchesContainer">
+                <!-- Tarjeta de Ejemplo en Vivo -->
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="px-2.5 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-full font-bold">Min 34' (0-0)</span>
+                        <span class="text-slate-400 font-semibold">Eredivisie 🇳🇱</span>
                     </div>
                     <div>
-                        <label class="block text-xs font-medium text-slate-400 mb-1">Liga Oficial Aprobada</label>
-                        <select id="matchLeague" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
-                            <option value="Eredivisie">Eredivisie (Países Bajos)</option>
-                            <option value="Besta deild karla">Besta deild karla (Islandia)</option>
-                            <option value="Bundesliga">Bundesliga (Alemania)</option>
-                            <option value="Austrian Bundesliga">Austrian Bundesliga (Austria)</option>
-                            <option value="Swiss Super League">Swiss Super League (Suiza)</option>
-                            <option value="A-League">A-League (Australia)</option>
-                            <option value="2. Bundesliga">2. Bundesliga (Alemania)</option>
+                        <h3 class="text-base font-black text-white">PSV Eindhoven vs Feyenoord</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Tiros a puerta: 2 | Presión alta activa</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-slate-800">
+                        <span class="text-xs text-slate-400">Cuota Over 1.5: <strong class="text-accentGreen font-mono text-sm">1.52</strong></span>
+                        <span class="px-2 py-1 bg-emerald-500/10 text-emerald-400 text-[11px] font-bold rounded-lg border border-emerald-500/20">ZONA DE ENTRADA</span>
+                    </div>
+                </div>
+
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md space-y-3">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="px-2.5 py-1 bg-slate-800 text-slate-400 rounded-full font-bold">Próximo 18:00</span>
+                        <span class="text-slate-400 font-semibold">Bundesliga 🇩🇪</span>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-black text-white">Bayern München vs RB Leipzig</h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Auditoría H2H y forma reciente OK</p>
+                    </div>
+                    <div class="flex justify-between items-center pt-2 border-t border-slate-800">
+                        <span class="text-xs text-slate-400">Cuota estimada: <strong class="text-slate-200 font-mono text-sm">1.38</strong></span>
+                        <span class="px-2 py-1 bg-blue-500/10 text-blue-400 text-[11px] font-bold rounded-lg border border-blue-500/20">MONITOREANDO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PESTAÑA 2: HUB DE ESTRATEGIAS ================= -->
+        <div id="content-hub" class="tab-content space-y-6 hidden">
+            <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-xl space-y-4">
+                <h2 class="text-xl font-black text-white flex items-center gap-2">
+                    <i class="fa-solid fa-book-open text-accentGreen"></i> Hub Central: Protocolo Over 1.5 FT & 7 Ligas
+                </h2>
+                <p class="text-sm text-slate-300">
+                    Sistema profesional dinámico basado en frecuencia estricta superior al 80% en competiciones de alta verticalidad, aplicando 8 pasos de seguridad estricts.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-accentGreen text-sm mb-2"><i class="fa-solid fa-shield mr-1"></i> Las 7 Ligas Oficiales Aprobadas</h3>
+                        <ul class="text-xs text-slate-400 space-y-1.5">
+                            <li>🇳🇱 <strong>Eredivisie</strong> (Países Bajos) - Liga nodriza (>86%)</li>
+                            <li>🇮🇸 <strong>Besta deild karla</strong> (Islandia) - Transiciones verticales (>87%)</li>
+                            <li>🇩🇪 <strong>Bundesliga</strong> (Alemania) - Alta intensidad ofensiva (>82%)</li>
+                            <li>🇦🇹 <strong>Austrian Bundesliga</strong> (Austria) - Fútbol abierto (>84%)</li>
+                            <li>🇨🇭 <strong>Swiss Super League</strong> (Suiza) - Ritmo elevado (>83%)</li>
+                            <li>🇦🇺 <strong>A-League</strong> (Australia) - Ida y vuelta constante (>85%)</li>
+                            <li>🇩🇪 <strong>2. Bundesliga</strong> (Alemania) - Única 2ª división élite (>81%)</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-900 p-4 rounded-xl border border-slate-800">
+                        <h3 class="font-bold text-accentBlue text-sm mb-2"><i class="fa-solid fa-list-check mr-1"></i> Protocolo de 8 Pasos</h3>
+                        <ol class="text-xs text-slate-400 space-y-1.5 list-decimal list-inside">
+                            <li>Validación macro de Liga en SoccerStats</li>
+                            <li>Veto de equipos lastre (Lista Negra)</li>
+                            <li>Forma reciente de 5 partidos (+2.5 goles)</li>
+                            <li>Auditoría de historial H2H directo</li>
+                            <li>Auditoría de tendencia activa de porcentajes</li>
+                            <li>Verificación de tiros a puerta (Min 30)</li>
+                            <li>Ventana temporal exacta (Min 30-40 con 0-0)</li>
+                            <li>Gestión de Stake (Criterio de Kelly)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= PESTAÑA 3: BACKTESTING ================= -->
+        <div id="content-backtest" class="tab-content space-y-8">
+            
+            <!-- Panel de Control Maestro: Filtro de las 7 Ligas -->
+            <div class="bg-gradient-to-r from-cardBg to-slate-900 p-6 rounded-2xl border border-accentGreen/30 shadow-xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-filter text-accentGreen"></i> Selector de las 7 Ligas Oficiales
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">Control y auditoría estricta enfocada exclusivamente en el mercado Over 1.5 FT.</p>
+                    </div>
+                    <button id="resetDataBtn" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold py-2 px-3 rounded-xl transition border border-slate-700">
+                        <i class="fa-solid fa-rotate-right mr-1"></i> Restaurar Historial Base
+                    </button>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Filtrar por Liga Oficial Aprobada</label>
+                        <select id="filterLeague" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen font-medium">
+                            <option value="ALL">🔍 Las 7 Ligas Oficiales (Global)</option>
+                            <option value="Eredivisie">🇳🇱 1. Eredivisie (Países Bajos)</option>
+                            <option value="Besta deild karla">🇮🇸 2. Besta deild karla (Islandia)</option>
+                            <option value="Bundesliga">🇩🇪 3. Bundesliga (Alemania)</option>
+                            <option value="Austrian Bundesliga">🇦🇹 4. Austrian Bundesliga (Austria)</option>
+                            <option value="Swiss Super League">🇨🇭 5. Swiss Super League (Suiza)</option>
+                            <option value="A-League">🇦🇺 6. A-League (Australia)</option>
+                            <option value="2. Bundesliga">🇩🇪 7. 2. Bundesliga (Alemania)</option>
                         </select>
                     </div>
-                    <button type="submit" class="w-full bg-accentGreen hover:bg-emerald-600 text-slate-950 font-bold py-3 px-4 rounded-xl transition shadow-lg text-sm mt-2">
-                        <i class="fa-solid fa-plus mr-1"></i> Añadir Test a la Estrategia
-                    </button>
-                </form>
+                    <div>
+                        <label class="block text-xs font-medium text-slate-400 mb-1">Estado del Test</label>
+                        <select id="filterResult" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen font-medium">
+                            <option value="ALL">📊 Todos los Resultados</option>
+                            <option value="ACERTADA">✅ Solo Acertadas</option>
+                            <option value="FALLADA">❌ Solo Falladas</option>
+                        </select>
+                    </div>
+                </div>
             </div>
 
-            <!-- Tabla de Seguimiento Detallado -->
-            <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md lg:col-span-2 flex flex-col">
-                <div class="flex justify-between items-center mb-4">
+            <!-- KPIs Dinámicos -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                    <span class="text-xs font-medium text-slate-400 uppercase">Tests en este Filtro</span>
+                    <p id="kpiTotalMatches" class="text-2xl font-black mt-2 text-white">0</p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Partidos auditados</span>
+                </div>
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                    <span class="text-xs font-medium text-slate-400 uppercase">Efectividad Over 1.5</span>
+                    <p id="kpiWinRate" class="text-2xl font-black mt-2 text-accentGreen">0.0%</p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Win Rate del filtro activo</span>
+                </div>
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                    <span class="text-xs font-medium text-slate-400 uppercase">Beneficio Neto (Unidades)</span>
+                    <p id="kpiProfit" class="text-2xl font-black mt-2 text-white">0.00 U</p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Rendimiento financiero</span>
+                </div>
+                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                    <span class="text-xs font-medium text-slate-400 uppercase">Cuota Media de Entrada</span>
+                    <p id="kpiAvgOdds" class="text-2xl font-black mt-2 text-white">1.35</p>
+                    <span class="text-[11px] text-slate-500 mt-1 block">Promedio de cuotas (≥ 1.50 obj)</span>
+                </div>
+            </div>
+
+            <!-- Sección de Registro y Tabla de Seguimiento -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Formulario de Registro Exclusivo Over 1.5 -->
+                <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md lg:col-span-1 space-y-4">
                     <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid fa-list-check text-accentBlue"></i> Historial Exclusivo Over 1.5 FT
+                        <i class="fa-solid fa-square-plus text-accentGreen"></i> Registrar Test Over 1.5 FT
                     </h2>
-                    <span id="matchCounterBadge" class="text-xs px-3 py-1 bg-slate-900 text-slate-300 rounded-lg border border-slate-700">Mostrando registros</span>
+                    <form id="backtestForm" class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Encuentro (Local vs Visitante)</label>
+                            <input type="text" id="matchName" required placeholder="Ej: PSV vs Feyenoord" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Cuota Over 1.5</label>
+                                <input type="number" step="0.01" id="matchOdds" required placeholder="1.52" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-400 mb-1">Goles Totales FT</label>
+                                <input type="number" id="matchGoals" required placeholder="3" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-400 mb-1">Liga Oficial Aprobada</label>
+                            <select id="matchLeague" class="w-full bg-slate-950 border border-slate-700 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-accentGreen">
+                                <option value="Eredivisie">Eredivisie (Países Bajos)</option>
+                                <option value="Besta deild karla">Besta deild karla (Islandia)</option>
+                                <option value="Bundesliga">Bundesliga (Alemania)</option>
+                                <option value="Austrian Bundesliga">Austrian Bundesliga (Austria)</option>
+                                <option value="Swiss Super League">Swiss Super League (Suiza)</option>
+                                <option value="A-League">A-League (Australia)</option>
+                                <option value="2. Bundesliga">2. Bundesliga (Alemania)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="w-full bg-accentGreen hover:bg-emerald-600 text-slate-950 font-bold py-3 px-4 rounded-xl transition shadow-lg text-sm mt-2">
+                            <i class="fa-solid fa-plus mr-1"></i> Añadir Test a la Estrategia
+                        </button>
+                    </form>
                 </div>
-                <div class="overflow-x-auto flex-1 max-h-[450px]">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="sticky top-0 bg-cardBg">
-                            <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase">
-                                <th class="py-3 px-4">Encuentro</th>
-                                <th class="py-3 px-4">Liga Aprobada</th>
-                                <th class="py-3 px-4">Cuota</th>
-                                <th class="py-3 px-4">Goles</th>
-                                <th class="py-3 px-4">Estado</th>
-                                <th class="py-3 px-4 text-right">Beneficio</th>
-                            </tr>
-                        </thead>
-                        <tbody id="backtestTableBody" class="divide-y divide-slate-800/60 text-sm">
-                            <!-- Inyectado por JS -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
 
-        <!-- ================= NUEVA SECCIÓN INFERIOR ================= -->
-        <!-- HISTÓRICO DE LAS ÚLTIMAS 3 TEMPORADAS & SYSTEM REPORT -->
-        <div class="space-y-6 pt-6 border-t border-slate-800">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h2 class="text-xl font-black text-white flex items-center gap-2">
-                        <i class="fa-solid fa-clock-rotate-left text-accentBlue"></i> Histórico de las Últimas 3 Temporadas & System Report
-                    </h2>
-                    <p class="text-xs text-slate-400">Auditoría plurianual consolidada sobre el rendimiento del protocolo en las 7 ligas aprobadas.</p>
-                </div>
-                <div class="flex gap-2">
-                    <select id="seasonFilter" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-accentBlue font-semibold">
-                        <option value="ALL">📅 Consolidado 3 Temporadas</option>
-                        <option value="2025/2026">Temporada 2025/2026</option>
-                        <option value="2024/2025">Temporada 2024/2025</option>
-                        <option value="2023/2024">Temporada 2023/2024</option>
-                    </select>
-                </div>
-            </div>
-
-            <!-- System Report & Métricas Plurianuales -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                    <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
-                        <span>Eventos Históricos Analizados</span>
-                        <i class="fa-solid fa-database text-accentBlue"></i>
+                <!-- Tabla de Seguimiento Detallado -->
+                <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md lg:col-span-2 flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-accentBlue"></i> Historial Exclusivo Over 1.5 FT
+                        </h2>
+                        <span id="matchCounterBadge" class="text-xs px-3 py-1 bg-slate-900 text-slate-300 rounded-lg border border-slate-700">Mostrando registros</span>
                     </div>
-                    <p id="sysTotalEvents" class="text-2xl font-black mt-2 text-white">150 Eventos</p>
-                    <span class="text-[11px] text-slate-500 mt-1 block">Muestra estadística robusta de 3 años</span>
-                </div>
-                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                    <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
-                        <span>Efectividad Global Histórica</span>
-                        <i class="fa-solid fa-chart-line text-accentGreen"></i>
+                    <div class="overflow-x-auto flex-1 max-h-[450px]">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="sticky top-0 bg-cardBg">
+                                <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase">
+                                    <th class="py-3 px-4">Encuentro</th>
+                                    <th class="py-3 px-4">Liga Aprobada</th>
+                                    <th class="py-3 px-4">Cuota</th>
+                                    <th class="py-3 px-4">Goles</th>
+                                    <th class="py-3 px-4">Estado</th>
+                                    <th class="py-3 px-4 text-right">Beneficio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="backtestTableBody" class="divide-y divide-slate-800/60 text-sm">
+                                <!-- Inyectado por JS -->
+                            </tbody>
+                        </table>
                     </div>
-                    <p id="sysGlobalWinRate" class="text-2xl font-black mt-2 text-accentGreen">86.7%</p>
-                    <span class="text-[11px] text-slate-500 mt-1 block">Supera el umbral mínimo del 80%</span>
-                </div>
-                <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
-                    <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
-                        <span>Beneficio Plurianual Acumulado</span>
-                        <i class="fa-solid fa-wallet text-amber-400"></i>
-                    </div>
-                    <p id="sysGlobalProfit" class="text-2xl font-black mt-2 text-accentGreen">+52.40 U</p>
-                    <span class="text-[11px] text-slate-500 mt-1 block">Rendimiento neto con cuota media 1.39</span>
                 </div>
             </div>
 
-            <!-- Tabla Histórica de Eventos (Últimas 3 Temporadas / 50 Eventos) -->
-            <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md flex flex-col">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-base font-bold text-white flex items-center gap-2">
-                        <i class="fa-solid id="table-cells" fa-table-cells text-accentGreen"></i> Registro Histórico Extendido (Últimas 3 Temporadas)
-                    </h3>
-                    <span id="historicalCounterBadge" class="text-xs px-3 py-1 bg-slate-900 text-slate-300 rounded-lg border border-slate-700">Mostrando registros históricos</span>
+            <!-- HISTÓRICO DE LAS ÚLTIMAS 3 TEMPORADAS & SYSTEM REPORT -->
+            <div class="space-y-6 pt-6 border-t border-slate-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="text-xl font-black text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clock-rotate-left text-accentBlue"></i> Histórico de las Últimas 3 Temporadas & System Report
+                        </h2>
+                        <p class="text-xs text-slate-400">Auditoría plurianual consolidada sobre el rendimiento del protocolo en las 7 ligas aprobadas.</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <select id="seasonFilter" class="bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-white focus:outline-none focus:border-accentBlue font-semibold">
+                            <option value="ALL">📅 Consolidado 3 Temporadas</option>
+                            <option value="2025/2026">Temporada 2025/2026</option>
+                            <option value="2024/2025">Temporada 2024/2025</option>
+                            <option value="2023/2024">Temporada 2023/2024</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="overflow-x-auto max-h-[400px]">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="sticky top-0 bg-cardBg z-10">
-                            <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase">
-                                <th class="py-3 px-4">Temporada</th>
-                                <th class="py-3 px-4">Encuentro (Histórico)</th>
-                                <th class="py-3 px-4">Liga Aprobada</th>
-                                <th class="py-3 px-4">Cuota</th>
-                                <th class="py-3 px-4">Goles FT</th>
-                                <th class="py-3 px-4">Estado</th>
-                                <th class="py-3 px-4 text-right">Beneficio</th>
-                            </tr>
-                        </thead>
-                        <tbody id="historicalTableBody" class="divide-y divide-slate-800/60 text-sm">
-                            <!-- Inyectado por JS -->
-                        </tbody>
-                    </table>
+
+                <!-- System Report & Métricas Plurianuales -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                        <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
+                            <span>Eventos Históricos Analizados</span>
+                            <i class="fa-solid fa-database text-accentBlue"></i>
+                        </div>
+                        <p id="sysTotalEvents" class="text-2xl font-black mt-2 text-white">150 Eventos</p>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Muestra estadística robusta de 3 años</span>
+                    </div>
+                    <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                        <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
+                            <span>Efectividad Global Histórica</span>
+                            <i class="fa-solid fa-chart-line text-accentGreen"></i>
+                        </div>
+                        <p id="sysGlobalWinRate" class="text-2xl font-black mt-2 text-accentGreen">86.7%</p>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Supera el umbral mínimo del 80%</span>
+                    </div>
+                    <div class="bg-cardBg p-5 rounded-2xl border border-slate-800 shadow-md">
+                        <div class="flex justify-between items-center text-xs text-slate-400 uppercase font-semibold">
+                            <span>Beneficio Plurianual Acumulado</span>
+                            <i class="fa-solid fa-wallet text-amber-400"></i>
+                        </div>
+                        <p id="sysGlobalProfit" class="text-2xl font-black mt-2 text-accentGreen">+52.40 U</p>
+                        <span class="text-[11px] text-slate-500 mt-1 block">Rendimiento neto con cuota media 1.39</span>
+                    </div>
+                </div>
+
+                <!-- Tabla Histórica de Eventos (Últimas 3 Temporadas) -->
+                <div class="bg-cardBg p-6 rounded-2xl border border-slate-800 shadow-md flex flex-col">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-base font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-table-cells text-accentGreen"></i> Registro Histórico Extendido (Últimas 3 Temporadas)
+                        </h3>
+                        <span id="historicalCounterBadge" class="text-xs px-3 py-1 bg-slate-900 text-slate-300 rounded-lg border border-slate-700">Mostrando registros históricos</span>
+                    </div>
+                    <div class="overflow-x-auto max-h-[400px]">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="sticky top-0 bg-cardBg z-10">
+                                <tr class="border-b border-slate-800 text-xs text-slate-400 uppercase">
+                                    <th class="py-3 px-4">Temporada</th>
+                                    <th class="py-3 px-4">Encuentro (Histórico)</th>
+                                    <th class="py-3 px-4">Liga Aprobada</th>
+                                    <th class="py-3 px-4">Cuota</th>
+                                    <th class="py-3 px-4">Goles FT</th>
+                                    <th class="py-3 px-4">Estado</th>
+                                    <th class="py-3 px-4 text-right">Beneficio</th>
+                                </tr>
+                            </thead>
+                            <tbody id="historicalTableBody" class="divide-y divide-slate-800/60 text-sm">
+                                <!-- Inyectado por JS -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </div>
 
     </main>
 
-    <!-- Motor Lógico Exclusivo Over 1.5 & Histórico 3 Temporadas -->
+    <!-- Motor Lógico de Pestañas y Backtesting -->
     <script>
+        // Función de Control de Pestañas
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById('content-' + tabId).classList.remove('hidden');
+
+            // Resetear estilos de botones de navegación
+            ['live', 'hub', 'backtest'].forEach(id => {
+                const btn = document.getElementById('tab-' + id);
+                btn.className = "px-4 py-2 text-xs font-bold rounded-lg transition text-slate-400 hover:text-white";
+            });
+
+            // Activar botón actual
+            const activeBtn = document.getElementById('tab-' + tabId);
+            activeBtn.className = "px-4 py-2 text-xs font-bold rounded-lg transition bg-accentGreen text-slate-950 shadow-md";
+        }
+
+        // Datos y Lógica de Backtesting
         const defaultMatches = [
             { id: 1, match: "PSV Eindhoven vs Feyenoord", league: "Eredivisie", odds: 1.48, goals: 3, result: "ACERTADA", profit: "+0.48 U" },
             { id: 2, match: "Víkingur Reykjavík vs Valur", league: "Besta deild karla", odds: 1.38, goals: 4, result: "ACERTADA", profit: "+0.38 U" },
@@ -269,7 +380,6 @@
             { id: 7, match: "Hamburger SV vs SC Paderborn", league: "2. Bundesliga", odds: 1.48, goals: 4, result: "ACERTADA", profit: "+0.48 U" }
         ];
 
-        // Base de datos simulada para el histórico de las últimas 3 temporadas
         const historicalSeasonsData = [
             { id: 101, season: "2025/2026", match: "Ajax vs AZ Alkmaar", league: "Eredivisie", odds: 1.42, goals: 3, result: "ACERTADA", profit: "+0.42 U" },
             { id: 102, season: "2025/2026", match: "Breiðablik vs Víkingur", league: "Besta deild karla", odds: 1.39, goals: 4, result: "ACERTADA", profit: "+0.39 U" },
@@ -355,7 +465,6 @@
             renderHistorical();
         }
 
-        // Renderizado del Histórico de las Últimas 3 Temporadas y System Report
         function renderHistorical() {
             const seasonFilter = document.getElementById('seasonFilter').value;
             const histTbody = document.getElementById('historicalTableBody');
@@ -396,7 +505,6 @@
                 histTbody.appendChild(tr);
             });
 
-            // Actualizar System Report de las 3 temporadas
             const totalH = filteredHist.length;
             document.getElementById('sysTotalEvents').innerText = totalH + " Eventos";
             
