@@ -1,0 +1,12 @@
+{
+  "background_color": "#0f172a",
+  "dir": "ltr",
+  "display": "standalone",
+  "name": "Apex Trader",
+  "orientation": "any",
+  "scope": "/",
+  "short_name": "ApexTrader",
+  "start_url": "/",
+  "theme_color": "#0f172a",
+  "description": "Suite Profesional de Estrategias &amp; Backtesting"
+}
